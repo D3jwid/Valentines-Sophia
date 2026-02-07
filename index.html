@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>💖 Pytanie 💖</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+
+        .btn-main {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        .btn-yes {
+            background-color: #38b000;
+            color: white;
+            margin-right: 200px;
+        }
+
+        .btn-no {
+            background-color: #6c757d;
+            color: white;
+            position: absolute;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .result {
+            color: white;
+            font-size: 2rem;
+            padding: 20%;
+        }
+
+        .memories-wrapper {
+            position: relative;
+            width: 80vw;
+            height: 80vh;
+            margin: auto;
+        }
+
+        .center-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .photo {
+            position: absolute;
+            width: 15vw;
+            height: 19vh;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* GÓRA */
+        .top { top: 0; }
+        .p1 { left: 20%; }
+        .p2 { left: 45%; }
+        .p3 { left: 70%; }
+
+        /* DÓŁ */
+        .bottom { bottom: 0; }
+        .p10 { left: 20%; }
+        .p11 { left: 45%; }
+        .p12 { left: 70%; }
+
+        /* LEWA */
+        .left { left: 0; }
+        .p4 { top: 20%; }
+        .p5 { top: 45%; }
+        .p6 { top: 70%; }
+
+        /* PRAWA */
+        .right { right: 0; }
+        .p7 { top: 20%; }
+        .p8 { top: 45%; }
+        .p9 { top: 70%; }
+    </style>
+</head>
+<body>
+
+<div class="container" id="step1">
+    <h1>Zosia mam pytanie</h1>
+    <button class="btn-main" onclick="goToStep2()">O boże jakie???</button>
+</div>
+
+<div class="container hidden" id="step2">
+    <h1>Czy zostaniesz moją walentynką myszko? 🐭💖</h1>
+    <button class="btn-yes" id="yesBtn" onclick="yesClicked()">TAK</button>
+    <button class="btn-no" id="noBtn">NIE</button>
+</div>
+
+<div class="container hidden" id="step3">
+    <div class="memories-wrapper">
+        <!-- GÓRA -->
+        <img src="img/1.jpg" class="photo top p1">
+        <img src="img/2.jpg" class="photo top p2">
+        <img src="img/3.jpg" class="photo top p3">
+    
+        <!-- LEWA -->
+        <img src="img/4.jpg" class="photo left p4">
+        <img src="img/5.jpg" class="photo left p5">
+        <img src="img/6.jpg" class="photo left p6">
+    
+        <!-- PRAWA -->
+        <img src="img/7.jpg" class="photo right p7">
+        <img src="img/8.jpg" class="photo right p8">
+        <img src="img/9.jpg" class="photo right p9">
+    
+        <!-- DÓŁ -->
+        <img src="img/10.jpg" class="photo bottom p10">
+        <img src="img/11.jpg" class="photo bottom p11">
+        <img src="img/12.jpg" class="photo bottom p12">
+    
+        <!-- ŚRODEK -->
+        <div class="center-box">
+            <h2>224 ❤️</h2>
+            <p>
+                💕 DZIĘKUJĘ, że zostaniesz moją walentynką. Zosiu kocham cię bardzo, nigdy nie czułem się jaki szczęśliwy jak przy tobie i jestem w niebio wzięty myśląc o tym, że spędzę resztę życia z tobą. Jesteś moją najcenniejszą wartością i jak o tobie myślę albo na ciebie patrzę to się rozpływam, proszę zostań ze mną na zawsze, zrobię wszystko żebyś czuła się przy mnie tak jak ja przy tobie i była tak samo szczęśliwa ❤️ Niedługo się zobaczymy i tak cię wyprzytulammm
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+
+    function goToStep2() {
+        document.getElementById('step1').classList.add('hidden');
+        document.getElementById('step2').classList.remove('hidden');
+
+        const yesRect = yesBtn.getBoundingClientRect();
+
+        noBtn.style.left = (yesRect.right + 40) + 'px';
+        noBtn.style.top = (yesRect.top -10) + 'px';
+    }
+
+    function yesClicked() {
+        document.getElementById('step2').classList.add('hidden');
+        document.getElementById('step3').classList.remove('hidden');
+    }
+
+    function moveNoButton() {
+        const padding = 50;
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        const rect = noBtn.getBoundingClientRect();
+        const btnX = rect.left + rect.width / 2;
+        const btnY = rect.top + rect.height / 2;
+
+        const distance = Math.sqrt(
+            Math.pow(e.clientX - btnX, 2) +
+            Math.pow(e.clientY - btnY, 2)
+        );
+
+        if (distance < 100) {
+            moveNoButton();
+        }
+    });
+</script>
+
+</body>
+</html>
